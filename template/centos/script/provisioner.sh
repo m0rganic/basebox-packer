@@ -22,3 +22,13 @@ if [ $PROVISIONER == 'chef' ]; then
 else
   echo "Building a box without a provisioner"
 fi
+
+if [ $PROVISIONER == 'ansible' ]; then
+  if [[ $PROVISIONER_VERSION == '1.4' || $PROVISIONER_VERSION == 'latest' ]]; then
+    echo "Installing Ansible version $PROVISIONER_VERSION"
+    apt-get install -y sudo python-dev python-apt python-pycurl python-pip python-virtualenv
+    pip install -U ansible==1.4
+  fi
+else
+  echo "Building a box without a provisioner"
+fi
